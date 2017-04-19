@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <div class="add-list" *ngIf="listState == 'default'">
+    <h2>Add List</h2>
+    <form (submit)="addList(); clearTitle()">
+      <input type="text" [(ngModel)]="title" name="test1">
+    </form>
+  </div>
+  <div class="add-list" *ngIf="listState == 'edit'">
+    <h2>Edit List</h2>
+    <form (submit)="updateList(); clearTitle()">
+      <input type="text" [(ngModel)]="title" name="test1">
+    </form>
+  </div>
+  <h2 class="list-title"><b>Your List</b></h2>
+  <ul class="list-container">
+    <li *ngFor="let list of lists">
+      <span (click)="editList(list)"><b> {{list.title}}</b></span> <button (click)="deleteList(list.title)">x</button>
+      <div *ngIf="todoState == 'default'">
+        <h4>Add Task</h4>
+        <form (submit)="addTodo(); clearText()">
+          <input type="text" [(ngModel)]="text" name="test2">
+        </form>
+      </div>
+      <div *ngIf="todoState == 'edit'">
+        <h3>Edit Task</h3>
+        <form (submit)="updateTodo(); clearText()">
+          <input type="text" [(ngModel)]="text" name="test2">
+        </form>
+      </div>
+      <br>
+      <ul class="todo-list">
+        <li *ngFor="let todo of todos">
+          <input type="checkbox"><span (click)="editTodo(todo)"> {{todo.text}}</span> <button (click)="deleteTodo(todo.text)">x</button>
+        </li>
+      </ul>
+      <br>
+    </li>
+  </ul>
+</div>
